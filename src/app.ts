@@ -1,15 +1,12 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import { getUsers } from "./controllers/users-controller";
 
 function createApp() {
   const app = express();
 
   app.use(express.json());
 
-  app.get("/", (req: Request, res: Response) => {
-    res.status(200).json({
-      player: "Messi",
-    });
-  });
+  app.get("/users", getUsers);
 
   return app;
 }
