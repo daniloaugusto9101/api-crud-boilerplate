@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
+import { getUsersService } from "../services/users-service";
 
-export const getUsers = (req: Request, res: Response) => {
-  res.status(200).json({
-    player: "Messi",
-  });
+export const getUsers = async (req: Request, res: Response) => {
+  const data = await getUsersService();
+  res.status(200).json(data);
 };
