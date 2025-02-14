@@ -1,9 +1,8 @@
-import { noContent, ok } from "../utils/http-helper";
+import { findAllUsers } from "../repositories/users-repository";
+import { ok, noContent } from "../utils/http-helper";
 
 export const getUsersService = async () => {
-  const data = {
-    player: "Ronaldo Nazário",
-  };
+  const data = await findAllUsers();
 
   let response = null;
   data ? (response = await ok(data)) : (response = await noContent());
