@@ -1,10 +1,10 @@
 import { UserModel } from "../models/users-model";
+import { PrismaClient } from "@prisma/client";
 
-const database: UserModel[] = [
-  { id: 1, name: "John2" },
-  { id: 2, name: "Jane" },
-];
+const prisma = new PrismaClient();
 
 export const findAllUsers = async (): Promise<UserModel[]> => {
-  return database;
+  const users = await prisma.user.findMany();
+  console.log(users);
+  return users;
 };
