@@ -21,6 +21,7 @@ export const findUsersByEmail = async (email: string): Promise<UserModel[]> => {
   return users;
 };
 
+//Inserre um usuário
 export const insertUser = async (body: CreateUserDTO): Promise<UserModel> => {
   const user: UserModel = await prisma.user.create({
     data: body,
@@ -41,4 +42,15 @@ export const deleteUser = async (email: string): Promise<UserModel> => {
 };
 
 //Atualiza um usuário
-// export const updateUser()
+export const updateUser = async (email: string, body: Partial<CreateUserDTO>): Promise<UserModel> => {
+  const user: UserModel = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      ...body,
+    },
+  });
+  prisma.$disconnect();
+  return user;
+};

@@ -30,3 +30,10 @@ export const deleteUser = async (email: string): Promise<HttpResponse> => {
   data ? (response = await ok(data)) : (response = await noContent());
   return response;
 };
+
+export const updateUser = async (email: string, body: Partial<CreateUserDTO>): Promise<HttpResponse> => {
+  const data: UserModel = await UsersRepository.updateUser(email, body);
+  let response = null;
+  data ? (response = await ok(data)) : (response = await noContent());
+  return response;
+};

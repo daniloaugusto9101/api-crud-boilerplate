@@ -28,3 +28,11 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
 
   res.status(httpResponse.statusCode).json(httpResponse.body);
 };
+
+export const updateUser = async (req: Request, res: Response): Promise<void> => {
+  const { email } = req.params;
+  const body: Partial<CreateUserDTO> = req.body;
+  const httpResponse: HttpResponse = await UsersService.updateUser(email, body);
+
+  res.status(httpResponse.statusCode).json(httpResponse.body);
+};
