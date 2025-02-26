@@ -8,7 +8,7 @@ router.get("/users/:email", UsersController.getUserByEmail);
 
 router.post("/users", UsersController.postUser);
 
-// router.delete("/users/:email", UsersController.deleteUser);
+router.delete("/users/:email", UsersController.deleteUser);
 
 // router.patch("/users/:email", UsersController.updateUser);
 

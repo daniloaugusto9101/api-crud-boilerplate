@@ -28,8 +28,17 @@ export const insertUser = async (body: CreateUserDTO): Promise<UserModel> => {
   prisma.$disconnect();
   return user;
 };
+
 //Deleta um usuário
-// export const deleteUser()
+export const deleteUser = async (email: string): Promise<UserModel> => {
+  const user: UserModel = await prisma.user.delete({
+    where: {
+      email,
+    },
+  });
+  prisma.$disconnect();
+  return user;
+};
 
 //Atualiza um usuário
 // export const updateUser()
