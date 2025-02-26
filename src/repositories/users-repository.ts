@@ -1,4 +1,4 @@
-import { UserModel } from "../models/users-model";
+import { CreateUserDTO, UserModel } from "../models/users-model";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -21,15 +21,13 @@ export const findUsersByEmail = async (email: string): Promise<UserModel[]> => {
   return users;
 };
 
-//Criar um usuário
-// export const insertUser = async (body: UserModel): Promise<UserModel> => {
-//   const user = await prisma.user.create({
-//     data: body, // Insere os dados do usuário no banco
-//   });
-
-//   return user;
-// };
-
+export const insertUser = async (body: CreateUserDTO): Promise<UserModel> => {
+  const user: UserModel = await prisma.user.create({
+    data: body,
+  });
+  prisma.$disconnect();
+  return user;
+};
 //Deleta um usuário
 // export const deleteUser()
 

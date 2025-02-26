@@ -1,5 +1,5 @@
 import { HttpResponse } from "../models/http-response-model";
-import { UserModel } from "../models/users-model";
+import { CreateUserDTO, UserModel } from "../models/users-model";
 import * as UsersRepository from "../repositories/users-repository";
 import { ok, noContent } from "../utils/http-helper";
 
@@ -17,9 +17,9 @@ export const getUserByEmail = async (email: string): Promise<HttpResponse> => {
   return response;
 };
 
-// export const postUser = async (body: UserModel): Promise<HttpResponse> => {
-//   const data = await UsersRepository.insertUser(body);
-//   let response = null;
-//   data.length > 0 ? (response = await ok(data)) : (response = await noContent());
-//   return response;
-// };
+export const postUser = async (body: CreateUserDTO): Promise<HttpResponse> => {
+  const data: UserModel = await UsersRepository.insertUser(body);
+  let response = null;
+  data ? (response = await ok(data)) : (response = await noContent());
+  return response;
+};

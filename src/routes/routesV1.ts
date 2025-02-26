@@ -6,7 +6,7 @@ const router = Router();
 router.get("/users", UsersController.getUsers);
 router.get("/users/:email", UsersController.getUserByEmail);
 
-// router.post("/users", UsersController.postUser);
+router.post("/users", UsersController.postUser);
 
 // router.delete("/users/:email", UsersController.deleteUser);
 
