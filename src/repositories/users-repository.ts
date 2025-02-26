@@ -1,18 +1,18 @@
-import { CreateUserDTO, UserModel } from "../models/users-model";
+import { CreateUserDTO, User } from "../models/users-model";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 //Resgata todos os usuários
-export const findAllUsers = async (): Promise<UserModel[]> => {
-  const users: UserModel[] | [] = await prisma.user.findMany();
+export const findAllUsers = async (): Promise<User[]> => {
+  const users: User[] | [] = await prisma.user.findMany();
   prisma.$disconnect();
   return users;
 };
 
 //Resgata usuário específico
-export const findUsersByEmail = async (email: string): Promise<UserModel[]> => {
-  const users: UserModel[] | [] = await prisma.user.findMany({
+export const findUsersByEmail = async (email: string): Promise<User[]> => {
+  const users: User[] | [] = await prisma.user.findMany({
     where: {
       email,
     },
@@ -22,8 +22,8 @@ export const findUsersByEmail = async (email: string): Promise<UserModel[]> => {
 };
 
 //Inserre um usuário
-export const insertUser = async (body: CreateUserDTO): Promise<UserModel> => {
-  const user: UserModel = await prisma.user.create({
+export const insertUser = async (body: CreateUserDTO): Promise<User> => {
+  const user: User = await prisma.user.create({
     data: body,
   });
   prisma.$disconnect();
@@ -31,8 +31,8 @@ export const insertUser = async (body: CreateUserDTO): Promise<UserModel> => {
 };
 
 //Deleta um usuário
-export const deleteUser = async (email: string): Promise<UserModel> => {
-  const user: UserModel = await prisma.user.delete({
+export const deleteUser = async (email: string): Promise<User> => {
+  const user: User = await prisma.user.delete({
     where: {
       email,
     },
@@ -42,8 +42,8 @@ export const deleteUser = async (email: string): Promise<UserModel> => {
 };
 
 //Atualiza um usuário
-export const updateUser = async (email: string, body: Partial<CreateUserDTO>): Promise<UserModel> => {
-  const user: UserModel = await prisma.user.update({
+export const updateUser = async (email: string, body: Partial<CreateUserDTO>): Promise<User> => {
+  const user: User = await prisma.user.update({
     where: {
       email,
     },
