@@ -4,10 +4,15 @@ import * as UsersRepository from "../repositories/users-repository";
 import * as HttpHelper from "../utils/http-helper";
 
 export const getUsers = async (): Promise<HttpResponse> => {
-  const data: UsersModel.User[] | [] = await UsersRepository.findAllUsers();
-  let response = null;
-  data.length > 0 ? (response = await HttpHelper.ok(data)) : (response = await HttpHelper.noContent());
-  return response;
+  try {
+    const data: UsersModel.User[] = await UsersRepository.findAllUsers();
+    let response = null;
+    data.length > 0 ? (response = HttpHelper.ok(data)) : (response = HttpHelper.noContent());
+    return response;
+  } catch (error) {
+    console.error("❌ Erro em getUsers -> Falha ao buscar usuários:", error);
+    return HttpHelper.serverError();
+  }
 };
 
 export const getUserByEmail = async (email: string): Promise<HttpResponse> => {

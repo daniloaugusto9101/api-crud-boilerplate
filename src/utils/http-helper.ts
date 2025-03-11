@@ -1,15 +1,29 @@
 import { HttpResponse } from "../models/http-response-model";
 
-export const ok = async (data: any): Promise<HttpResponse> => {
+export const ok = (data: any): HttpResponse => {
   return {
     statusCode: 200,
     body: data,
   };
 };
 
-export const noContent = async (): Promise<HttpResponse> => {
+export const noContent = (): HttpResponse => {
   return {
     statusCode: 204,
     body: null,
+  };
+};
+
+export const serverError = (): HttpResponse => {
+  return {
+    statusCode: 500,
+    body: "Erro no servidor",
+  };
+};
+
+export const badRequest = (error: Error): HttpResponse => {
+  return {
+    statusCode: 400,
+    body: error.message,
   };
 };
